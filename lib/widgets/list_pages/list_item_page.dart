@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class ListItemPage extends StatelessWidget {
   final String itemTitle;
 
-  const ListItemPage(this.itemTitle);
+  const ListItemPage(this.itemTitle, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +11,7 @@ class ListItemPage extends StatelessWidget {
       body: Center(
         child: Text(
           "$itemTitle Page",
-          style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+          style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
         ),
       ),
     );

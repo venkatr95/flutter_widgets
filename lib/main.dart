@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_widgets/widgets/list_pages/listTileWidget.dart';
 import 'package:flutter_widgets/widgets/table/table_widget.dart';
 
 void main() {
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.indigo,
+        primarySwatch: Colors.teal,
       ),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
@@ -31,16 +32,13 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  List<Widget> _listTableItem(BuildContext context) => <Widget>[
-    const TableWidget()
-  ];
   List<String> drawerNames = [
     'Alabama',
     'Alaska',
     'Arizona',
     'Arkansas'
   ];
-  List<bool> drawerNamesSelected = [false, true, true, true];
+  List<Widget> drawerWidgets = [const TableWidget(), const TableWidget(), const TableWidget(), const TableWidget()];
 
   @override
   Widget build(BuildContext context) {
@@ -50,21 +48,9 @@ class _MyHomePageState extends State<MyHomePage> {
         child: ListView.separated(
           itemCount: drawerNames.length,
           itemBuilder: (context, index) {
-            return ListTile(
-              onTap: () {
-                setState(() {
-                  for (var i = 0; i < drawerNamesSelected.length; i++) {
-                    drawerNamesSelected[i] = false;
-                  }
-                  drawerNamesSelected[index] = true;
-                });
-              },
-              trailing:
-                drawerNamesSelected[index] == false ? const SizedBox.shrink() : Image.asset('assets/images/circle_avatar.png', width: 6, height: 5),
-              title: Text(
-                  drawerNames[index]
-              ),
-            );
+            for (var i = 0; i < drawerNames.length; i++) {
+              return buildListTile(context, Icons.home, drawerNames[index], drawerWidgets[i]);
+            }
           },
           separatorBuilder: (context, index) {
             return const Divider();
