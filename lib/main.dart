@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (context) => ValidationModel(null, null),
+      create: (context) => FormProvider(),
          child: MaterialApp(
           title: 'Flutter Demo',
           theme: ThemeData(
@@ -68,7 +68,7 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: const <Widget>[
             Text(
-              'You have pushed the button this many times:',
+              'Hello Widgets!',
             ),
           ],
         ),

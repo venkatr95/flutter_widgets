@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_widgets/widgets/form_validation/validation_model.dart';
+import 'package:flutter_widgets/widgets/general_screens/success_screen.dart';
 import 'package:flutter_widgets/widgets/table/table_widget.dart';
 import 'package:provider/provider.dart';
 
@@ -62,7 +63,7 @@ class ProviderFormPageState extends State<ProviderFormPage> {
                     if (model.validate) {
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (_) => const TableWidget(),
+                          builder: (_) => const SuccessScreen(),
                         ),
                       );
                     }
