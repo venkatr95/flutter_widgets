@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_widgets/utils/themeNotifier.dart';
+import 'package:provider/provider.dart';
 
 List<Map> _books = [
   {
@@ -30,7 +32,9 @@ class TableWidgetScreenState extends State<TableWidget> {
 
   @override
   Widget build(BuildContext context) {
+    ThemeProvider themeProvider = Provider.of<ThemeProvider>(context, listen: false);
     return MaterialApp(
+      theme: themeProvider.getTheme,
       home: Scaffold(
         appBar: AppBar(
           title: const Text('DataTable Demo'),

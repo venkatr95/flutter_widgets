@@ -1,14 +1,26 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_widgets/styles/fl_theme.dart';
+import 'package:flutter_widgets/utils/themeNotifier.dart';
 import 'package:flutter_widgets/widgets/form_validation/form_provider.dart';
 import 'package:flutter_widgets/widgets/form_validation/validation_model.dart';
 import 'package:flutter_widgets/widgets/list_pages/listTileWidget.dart';
 import 'package:flutter_widgets/widgets/table/table_widget.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding
+      .ensureInitialized(); //required to use platform channels to call native code.
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  bool themeBool = prefs.getBool("isDark") ?? false; //null check
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider(create: (context) => FormProvider()),
+      ChangeNotifierProvider(create: (BuildContext context) => ThemeProvider(isDark: themeBool)),
+    ],
+    child: const MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -17,19 +29,15 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    bool isDarkTheme = lightMode;
-    return ChangeNotifierProvider(
-      create: (context) => FormProvider(),
-         child: MaterialApp(
-          theme: lightMode ? lightTheme : darkTheme,
-          title: 'Flutter Demo',
-          home: const MyHomePage(title: 'Flutter Demo Home Page'),
-        ),
-    );
+    return Consumer<ThemeProvider>(builder: (context, themeProvider, child) {
+      return MaterialApp(
+        theme: themeProvider.getTheme,
+        title: 'Flutter Demo',
+        home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      );
+    });
   }
 }
-
-bool lightMode = true;
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
@@ -40,15 +48,7 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
-ThemeData lightTheme = ThemeData(
-  primaryColor: Colors.greenAccent,
-  brightness: Brightness.light
-);
-
-ThemeData darkTheme = ThemeData(
-    primaryColor: Colors.blue,
-    brightness: Brightness.dark
-);
+bool themeMode = false;
 
 class _MyHomePageState extends State<MyHomePage> {
   List<String> drawerNames = [
@@ -59,19 +59,20 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    ThemeProvider themeProvider = Provider.of<ThemeProvider>(context, listen: false);
     return Scaffold(
       drawerEnableOpenDragGesture: true,
       drawer: Drawer(
-        child: ListView.separated(
-          itemCount: drawerNames.length,
-          itemBuilder: (context, index) {
-            return buildListTile(context, Icons.home, drawerNames[index], drawerWidgets[index]);
-          },
-          separatorBuilder: (context, index) {
-            return const Divider();
-          },
-        )
-      ),
+          child: ListView.separated(
+        itemCount: drawerNames.length,
+        itemBuilder: (context, index) {
+          return buildListTile(
+              context, Icons.home, drawerNames[index], drawerWidgets[index]);
+        },
+        separatorBuilder: (context, index) {
+          return const Divider();
+        },
+      )),
       appBar: AppBar(
         title: Text(widget.title),
       ),
@@ -82,13 +83,21 @@ class _MyHomePageState extends State<MyHomePage> {
             const Text(
               'Hello Widgets!',
             ),
+            const Spacer(),
+            const Text(
+              'Switch Light/Dark Mode',
+            ),
             Switch(
-                value: lightMode,
-                onChanged: (toggle) {
+                value: themeProvider.getTheme == darkTheme,
+                activeColor: themeProvider.getTheme == darkTheme
+                    ? Colors.white
+                    : Colors.black,
+                onChanged: (d) {
                   setState(() {
-                    lightMode = toggle;
+                    themeMode = d;
                   });
-                }),
+                  themeProvider.changeTheme();
+                })
           ],
         ),
       ),

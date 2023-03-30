@@ -29,3 +29,25 @@ class FlTheme {
 
   }
 }
+
+//LightTheme
+ThemeData lightTheme = ThemeData(
+  brightness: Brightness.light,
+  primaryColor: Colors.white,
+);
+
+TextStyle lightTextStyle = const TextStyle(
+  fontSize: 20,
+  color: Colors.black,
+);
+
+//DarkTheme
+ThemeData darkTheme = ThemeData(
+  brightness: Brightness.dark,
+  primaryColor: Colors.black,
+);
+
+TextStyle darkTextStyle = const TextStyle(
+  fontSize: 20,
+  color: Colors.white,
+);
