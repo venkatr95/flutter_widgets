@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_widgets/styles/fl_theme.dart';
 import 'package:flutter_widgets/widgets/form_validation/form_provider.dart';
 import 'package:flutter_widgets/widgets/form_validation/validation_model.dart';
 import 'package:flutter_widgets/widgets/list_pages/listTileWidget.dart';
@@ -15,18 +17,19 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    bool isDarkTheme = lightMode;
     return ChangeNotifierProvider(
       create: (context) => FormProvider(),
          child: MaterialApp(
+          theme: lightMode ? lightTheme : darkTheme,
           title: 'Flutter Demo',
-          theme: ThemeData(
-            primarySwatch: Colors.teal,
-          ),
           home: const MyHomePage(title: 'Flutter Demo Home Page'),
         ),
     );
   }
 }
+
+bool lightMode = true;
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
@@ -37,6 +40,16 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
+ThemeData lightTheme = ThemeData(
+  primaryColor: Colors.greenAccent,
+  brightness: Brightness.light
+);
+
+ThemeData darkTheme = ThemeData(
+    primaryColor: Colors.blue,
+    brightness: Brightness.dark
+);
+
 class _MyHomePageState extends State<MyHomePage> {
   List<String> drawerNames = [
     'Table Widget',
@@ -46,7 +59,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    ListTile listTileVar;
     return Scaffold(
       drawerEnableOpenDragGesture: true,
       drawer: Drawer(
@@ -66,10 +78,17 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: const <Widget>[
-            Text(
+          children: <Widget>[
+            const Text(
               'Hello Widgets!',
             ),
+            Switch(
+                value: lightMode,
+                onChanged: (toggle) {
+                  setState(() {
+                    lightMode = toggle;
+                  });
+                }),
           ],
         ),
       ),
