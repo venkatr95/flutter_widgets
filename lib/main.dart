@@ -1,10 +1,10 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_widgets/styles/fl_theme.dart';
 import 'package:flutter_widgets/utils/themeNotifier.dart';
 import 'package:flutter_widgets/widgets/form_validation/form_provider.dart';
 import 'package:flutter_widgets/widgets/form_validation/validation_model.dart';
 import 'package:flutter_widgets/widgets/list_pages/listTileWidget.dart';
+import 'package:flutter_widgets/widgets/search_screen/search_widget.dart';
 import 'package:flutter_widgets/widgets/table/table_widget.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -17,7 +17,8 @@ void main() async {
   runApp(MultiProvider(
     providers: [
       ChangeNotifierProvider(create: (context) => FormProvider()),
-      ChangeNotifierProvider(create: (BuildContext context) => ThemeProvider(isDark: themeBool)),
+      ChangeNotifierProvider(
+          create: (BuildContext context) => ThemeProvider(isDark: themeBool)),
     ],
     child: const MyApp(),
   ));
@@ -54,12 +55,14 @@ class _MyHomePageState extends State<MyHomePage> {
   List<String> drawerNames = [
     'Table Widget',
     'Form Validation',
+    'Search Page',
   ];
-  List<Widget> drawerWidgets = [const TableWidget(), const ProviderFormPage()];
+  List<Widget> drawerWidgets = [const TableWidget(), const ProviderFormPage(), const SearchWidget()];
 
   @override
   Widget build(BuildContext context) {
-    ThemeProvider themeProvider = Provider.of<ThemeProvider>(context, listen: false);
+    ThemeProvider themeProvider =
+        Provider.of<ThemeProvider>(context, listen: false);
     return Scaffold(
       drawerEnableOpenDragGesture: true,
       drawer: Drawer(
