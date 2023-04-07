@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_widgets/styles/fl_theme.dart';
 import 'package:flutter_widgets/utils/themeNotifier.dart';
+import 'package:flutter_widgets/widgets/common_widgets/custom_radio_button.dart';
 import 'package:flutter_widgets/widgets/form_validation/form_provider.dart';
 import 'package:flutter_widgets/widgets/form_validation/validation_model.dart';
 import 'package:flutter_widgets/widgets/search_screen/search_widget.dart';
@@ -57,11 +58,13 @@ class _MyHomePageState extends State<MyHomePage> {
     'Table Widget',
     'Form Validation',
     'Search Page',
+    'Radio List',
   ];
   List<Widget> drawerWidgets = [
     const TableWidget(),
     const ProviderFormPage(),
-    const SearchWidget()
+    const SearchWidget(),
+    const CustomRadioWidget()
   ];
 
   @override
