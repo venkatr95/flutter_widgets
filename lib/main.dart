@@ -3,11 +3,12 @@ import 'package:flutter_widgets/styles/fl_theme.dart';
 import 'package:flutter_widgets/utils/themeNotifier.dart';
 import 'package:flutter_widgets/widgets/form_validation/form_provider.dart';
 import 'package:flutter_widgets/widgets/form_validation/validation_model.dart';
-import 'package:flutter_widgets/widgets/list_pages/listTileWidget.dart';
 import 'package:flutter_widgets/widgets/search_screen/search_widget.dart';
 import 'package:flutter_widgets/widgets/table/table_widget.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'widgets/models/listTileWidget.dart';
 
 void main() async {
   WidgetsFlutterBinding
@@ -57,7 +58,11 @@ class _MyHomePageState extends State<MyHomePage> {
     'Form Validation',
     'Search Page',
   ];
-  List<Widget> drawerWidgets = [const TableWidget(), const ProviderFormPage(), const SearchWidget()];
+  List<Widget> drawerWidgets = [
+    const TableWidget(),
+    const ProviderFormPage(),
+    const SearchWidget()
+  ];
 
   @override
   Widget build(BuildContext context) {
