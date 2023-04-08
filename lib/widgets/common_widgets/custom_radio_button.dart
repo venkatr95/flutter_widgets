@@ -16,6 +16,7 @@ class CustomRadioWidgetState extends State<CustomRadioWidget> {
   void initState() {
     super.initState();
     selectedRadioBtn = 0;
+    selectedRadioButton = RadioButton(radioId: 0, title: 'gg');
     radioButtons = RadioButton.getRadioButtons();
   }
 
@@ -31,13 +32,13 @@ class CustomRadioWidgetState extends State<CustomRadioWidget> {
       widgets.add(
         RadioListTile(
           value: radio,
-          groupValue: selectedRadioBtn,
+          groupValue: selectedRadioButton,
           title: Text(radio.title),
-          // onChanged: (currentUser) {
-          //   setSelectedRadio(radio);
-          // },
+          onChanged: (currentUser) {
+            setSelectedRadio(radio);
+          },
           selected: selectedRadioButton == radio,
-          activeColor: Colors.green, onChanged: (Object? value) {},
+          activeColor: Colors.green,
         ),
       );
     }
