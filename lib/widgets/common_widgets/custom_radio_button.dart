@@ -75,11 +75,11 @@ class RadioButton {
 
   static List<RadioButton> getRadioButtons() {
     return <RadioButton>[
-      RadioButton(radioId: 1, title: "Aaron"),
-      RadioButton(radioId: 2, title: "Ben"),
-      RadioButton(radioId: 3, title: "Carrie"),
-      RadioButton(radioId: 4, title: "Deep"),
-      RadioButton(radioId: 5, title: "Emily"),
+      RadioButton(radioId: 1, title: "RB1"),
+      RadioButton(radioId: 2, title: "RB2"),
+      RadioButton(radioId: 3, title: "RB3"),
+      RadioButton(radioId: 4, title: "RB4"),
+      RadioButton(radioId: 5, title: "RB5"),
     ];
   }
 }
