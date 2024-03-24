@@ -2,13 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_widgets/widgets/form_validation/validation_model.dart';
 import 'package:flutter_widgets/widgets/general_screens/success_screen.dart';
-import 'package:flutter_widgets/widgets/table/table_widget.dart';
 import 'package:provider/provider.dart';
 
 import 'custom_field.dart';
 
 class ProviderFormPage extends StatefulWidget {
-  const ProviderFormPage({Key? key}) : super(key: key);
+  const ProviderFormPage({super.key});
 
   @override
   ProviderFormPageState createState() => ProviderFormPageState();

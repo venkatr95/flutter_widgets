@@ -3,13 +3,13 @@ import 'package:flutter/services.dart';
 
 class CustomFormField extends StatelessWidget {
   const CustomFormField({
-    Key? key,
+    super.key,
     required this.hintText,
     required this.errorText,
     this.onChanged,
     this.validator,
     this.inputFormatters,
-  }) : super(key: key);
+  });
   final String hintText;
   final List<TextInputFormatter>? inputFormatters;
   final String? errorText;

@@ -9,12 +9,11 @@ class Responsive extends StatelessWidget {
   final Widget? desktop;
 
   const Responsive(
-      {Key? key,
-        required this.mobile,
-        this.tablet,
-        required this.laptop,
-        this.desktop})
-      : super(key: key);
+      {super.key,
+      required this.mobile,
+      this.tablet,
+      required this.laptop,
+      this.desktop});
 
 // This size work fine on my design, maybe you need some customization depends on your design
 
@@ -24,11 +23,11 @@ class Responsive extends StatelessWidget {
 
   static bool isTablet(BuildContext context) =>
       MediaQuery.of(context).size.width > 600 &&
-          MediaQuery.of(context).size.width <= 905;
+      MediaQuery.of(context).size.width <= 905;
 
   static bool isLaptop(BuildContext context) =>
       MediaQuery.of(context).size.width >= 1240 &&
-          MediaQuery.of(context).size.width < 1439;
+      MediaQuery.of(context).size.width < 1439;
 
   static bool isDesktop(BuildContext context) =>
       MediaQuery.of(context).size.width >= 1440;
